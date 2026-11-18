@@ -1,0 +1,28 @@
+[worldserver]
+
+########################################
+# mod-tofu-bot-spells (Tofu Worldview)
+########################################
+#
+#    TofuBotSpells.Enable
+#        Description: Register the "tofu bot spells" combat strategy for mod-playerbots bots. Read once at startup; a change needs a worldserver restart.
+#        Default:     1 - Enabled
+#                     0 - Disabled
+#
+
+TofuBotSpells.Enable = 1
+
+#
+#    TofuBotSpells.Rules
+#        Description: When to cast custom spells. Rules are separated by ';'. Each rule is "spellId trigger>action!priority":
+#            spellId   the custom spell ID; the rule applies only to bots that know this spell.
+#            trigger   a playerbots trigger name, for example "low mana", "low energy", "light rage available", "generic boost", "medium aoe".
+#            action    a playerbots action name, for example "arcane torrent". Bots look the spell up by its name among the spells they know, so the custom spell must keep that name. Several actions are allowed, separated by ','.
+#            priority  optional, default 15 (playerbots' racials use 15).
+#        Unknown trigger or action names are reported in the worldserver log at startup. Read once at startup; a change needs a worldserver restart.
+#        Default:     the custom Arcane Torrent spells of the racial swap fork:
+#            900000 (warrior, 15 rage): cast with 20 or more rage, which is close to on cooldown in combat.
+#            900001 (druid; rage in bear, energy in cat, mana otherwise): cast with 20 or more rage, low energy, or low mana, so every form uses it.
+#
+
+TofuBotSpells.Rules = "900000 light rage available>arcane torrent!15; 900001 light rage available>arcane torrent!15; 900001 low energy>arcane torrent!15; 900001 low mana>arcane torrent!15"
